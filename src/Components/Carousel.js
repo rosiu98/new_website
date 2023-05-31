@@ -15,7 +15,6 @@ import Skeleton from "react-loading-skeleton";
 import 'react-loading-skeleton/dist/skeleton.css'
 
 import code_icon from '../Assets/code_icon.svg'
-import viewMore_icon from '../Assets/view_more_icon.svg'
 import previewPage_icon from '../Assets/PreviewPage_icon.svg'
 import { Link } from "react-router-dom";
 
