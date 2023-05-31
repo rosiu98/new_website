@@ -34,6 +34,7 @@ const MainHeader= styled.header`
     right: 0;
     margin-top: 7rem;
     max-width:100%;
+    max-width: 13rem;
 
     @media (max-width: 1400px) {
       max-width: 10rem;
