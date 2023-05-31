@@ -1,83 +1,106 @@
 import React from "react";
 import styled from "styled-components";
-import header_main from "../Assets/header_main.png";
-import Button from "./Button";
+import header_image from "../Assets/header_image.png"
+import logo from "../Assets/Logo_PR.svg"
+import ButtonNew from "./ButtonNew";
 
-const Columns = styled.header`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  margin-top: 2rem;
-  clip-path: polygon(10% 0%, 100% 0, 100% 100%, 0 100%, 0 13%);
+
+const MainHeader= styled.header`
+  position: relative;
+  padding-bottom: 12rem;
+
+  & .column_header_text {
+    display: flex;
+    justify-content: end;
+    flex-direction:column;
+    align-items: end;
+    padding-top: 35%;
+    position: relative;
+    z-index: 999;
+
+    @media (max-width: 900px) {
+    padding-top: 5rem;
+    }
+
+  }
+
+  & .logo_div {
+    text-align:right;
+  }
+  
+  & .main_logo {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: 7rem;
+    max-width:100%;
+
+    @media (max-width: 1400px) {
+      max-width: 10rem;
+    }
+
+    @media (max-width: 900px) {
+      position: relative;
+      margin-top:5rem;
+      margin-bottom:5rem;
+    }
+  }
+
 
   & .main_image {
-    width: 100%;
-    height: 100%;
-    filter: brightness(0.7);
-  }
-`;
+    max-width: 100%;
+    position: absolute;
 
-const ColumnsText = styled.div`
-  background-color: #f2f2f2;
+    @media (max-width: 1470px) {
+      max-width: 85%;
+    }
 
-  & .main {
-    margin-left: 8rem;
-    position: relative;
-    height: 100%;
-  }
-
-  nav {
-    display: flex;
-    gap: 4rem;
-    font-size: 24px;
-    justify-content: flex-end;
-    margin-right: 7rem;
-    margin-top: 5rem;
-
-    & a {
-      color: black;
+    @media (max-width: 900px) {
+      width: 100%;
+      max-width:100%;
+      position: unset;
     }
   }
+
 
   & .main_text {
-    position: absolute;
-    top: 50%;
-    left: 0%;
-    transform: translate(0%, -50%);
+    max-width: 45%;
+    margin-bottom: 10rem;
 
-    p {
-      margin-right: 7rem;
+    @media (max-width: 900px) {
+      max-width: 100%
     }
   }
-`;
 
-const Header = () => {
+`
+
+const Headerv2 = () => {
   return (
-    <Columns>
-      <div>
-        <img className="main_image" src={header_main} alt="Moje zdjecie" />
-      </div>
-      <ColumnsText>
-        <div className="main">
-          <nav>
-            <a>About</a>
-            <a>Projects</a>
-            <a>Contact</a>
-          </nav>
+    <MainHeader id="home">
+        <div className="logo_div">
+          <img className="main_logo" src={logo} alt="Logo DEV R.P" />
+        </div>
+
+        <img className="main_image" src={header_image} alt="Moje zdjecie" />
+        
+        <div className="column_header_text">
           <div className="main_text header_text">
             <h1>Rosiek</h1>
             <span>Email Developer | Front-end Developer</span>
             <p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen&nbsp;book.
+            Hello there! I'm Paul Rosiek, an accomplished Email Developer and Front-End Developer who is passionate about creating visually stunning websites that leave a lasting impact. With my expertise in both email marketing and front-end development, I&nbsp;am here to transform your digital presence into a captivating&nbsp;journey.
             </p>
-            <Button props={"Click Me"} />
+            <ButtonNew link="/projects" props={"Projects"} />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <ButtonNew link="/cv" props={"CV"} bg={'#6a6054'} />
           </div>
         </div>
-      </ColumnsText>
-    </Columns>
+        <div className="border_square">
+
+</div>
+    </MainHeader>
+    
   );
 };
 
-export default Header;
+export default Headerv2;

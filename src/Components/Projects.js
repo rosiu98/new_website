@@ -1,20 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Carousel from "./Carousel";
 import SectionNumber from "./SectionNumber";
-import iconEmail from "../Assets/icon_email.png";
-import iconServices1 from "../Assets/services_1.png";
-import iconServices2 from "../Assets/services_2.png";
+import Services from "./Services";
+import manualContent from "./manualContent";
 
 const Project = styled.section`
-  background-color: #f2f2f2;
+  background-color: #ececec;
   padding-bottom: 20rem;
   overflow: hidden;
+
+  @media (max-width: 1500px) {
+    padding-bottom: 8rem;
+  }
+
+  @media (max-width: 1250px) {
+    padding-bottom: 2rem;
+  }
 
   .header_text {
     text-align: center;
     margin-top: -9rem;
     margin-bottom: 6rem;
+
+    @media (max-width: 800px) {
+        margin-top: 2rem;
+      }
   }
 
   .tags {
@@ -25,16 +36,34 @@ const Project = styled.section`
     position: relative;
     z-index: 999;
     margin-bottom: 6rem;
+    flex-wrap: wrap;
 
-    & a {
+    @media (max-width: 800px) {
+        gap: 2.5rem;
+      }
+
+    .active {
+        background: linear-gradient(180deg,#CF9627 0%,#C67F2A 100%) !important;
+    }  
+
+    & span {
       border-radius: 1rem;
       padding: 2rem 4rem;
-      background-color: white;
+      background-color: #2d313d;
+      
       font-size: 1.6rem;
       font-family: Arial, "Roboto", sans-serif;
       font-weight: bold;
-      color: #545454;
+      cursor: pointer;
+      color: white;
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+
+      @media (max-width: 800px) {
+        font-size: 1.4rem;
+        padding: 1.5rem 3rem;
+      }
+
     }
 
     & .border_text {
@@ -42,194 +71,87 @@ const Project = styled.section`
       writing-mode: unset;
       z-index: -1;
       margin-left: 45%;
-    }
-  }
 
-  .services {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 9rem;
-    margin-top: 5rem;
-
-    & .border_text {
-      transform: scale(-1, -1);
-    }
-
-    & .services_box {
-      background-color: #6a6054;
-      padding: 7rem 0;
-      color: white;
-      border-radius: 20px 0px 0px 20px;
-      display: flex;
-
-      flex: 70% 0 0;
-
-      & .services_text {
-        margin-left: 8rem;
-        flex: 30% 0 0;
-
-        & img {
-          width: 100%;
-          max-width: 40px;
-        }
-
-        & h3 {
-          font-size: 3.2rem;
-          font-weight: bold;
-          font-family: "Roboto", Arial, sans-serif;
-          margin: 3rem 0;
-        }
-
-        & p {
-          font-family: Arial, "Roboto", sans-serif;
-          font-size: 1.6rem;
-          line-height: 3rem;
-          max-width: 320px;
-          margin-bottom: 8rem;
-        }
-
-        & a {
-          font-size: 2rem;
-          font-family: "Roboto", Arial, sans-serif;
-          text-decoration: underline;
-        }
-      }
-
-      & .services_img {
-        position: relative;
-        min-width: 440px;
-        width: 100%;
-        height: 100%;
-        & img {
-          width: 100%;
-          max-width: 550px;
-          position: absolute;
-          top: -185px;
-        }
+      @media (max-width: 800px) {
+        display: none;
       }
     }
   }
 
-  .services2 {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 9rem;
-    margin-top: 5rem;
-    margin-bottom: 10rem;
-
-    & .border_text {
-      transform: scale(-1, -1);
-    }
-
-    & .services_box {
-      background-color: #2d313d;
-      padding: 7rem 0;
-      color: white;
-      border-radius: 0px 20px 20px 0px;
-      display: flex;
-
-      flex: 70% 0 0;
-
-      & .services_text {
-        margin-left: 5rem;
-        flex: 40% 0 0;
-
-        & img {
-          width: 100%;
-          max-width: 40px;
-        }
-
-        & h3 {
-          font-size: 3.2rem;
-          font-weight: bold;
-          font-family: "Roboto", Arial, sans-serif;
-          margin: 3rem 0;
-        }
-
-        & p {
-          font-family: Arial, "Roboto", sans-serif;
-          font-size: 1.6rem;
-          line-height: 3rem;
-          max-width: 320px;
-          margin-bottom: 8rem;
-        }
-
-        & a {
-          font-size: 2rem;
-          font-family: "Roboto", Arial, sans-serif;
-          text-decoration: underline;
-        }
-      }
-
-      & .services_img {
-        position: relative;
-        min-width: 440px;
-        width: 100%;
-        height: 100%;
-        margin-left: 3rem;
-        & img {
-          width: 100%;
-          max-width: 550px;
-          position: absolute;
-          top: -135px;
-        }
-      }
-    }
-  }
 `;
 
 const Projects = () => {
+
+  const [chunked, setChunked] = useState([])
+  const [selectedType, setSelectedType] = useState('All')
+  const [loading , setLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true)
+      const response = await fetch('https://email-app.website/api/v1/profile/20');
+      const result = await response.json();
+      let emailsResults = result.rows.filter(row => row.contentblock === null || undefined)
+
+      manualContent.forEach(content => emailsResults = [content, ...emailsResults])
+
+      // emailsResults = [manualContent, ...emailsResults]
+
+      if (selectedType && selectedType !== 'All') {
+        emailsResults = emailsResults.filter(row => row.type === selectedType)
+      }
+
+      console.log(emailsResults)
+
+      const chunkData = () => {
+        const chinkSize = 5;
+        const newArray = [];
+    
+        for (let i = 0 ; i < emailsResults.length; i += chinkSize) {
+          const chunk = emailsResults.slice(i, i + chinkSize);
+          newArray.push(chunk)
+        }
+    
+        setChunked(newArray)
+      }
+
+      chunkData()
+      
+    }
+
+    fetchData()
+    setTimeout(() => setLoading(false), 1000) 
+  
+  },[selectedType])
+
+
+  // console.log(chunked)
+
+  const ChangeType = (type) => {
+
+    setSelectedType(type)
+
+  }
+
+  // console.log(loading)
+
+
+
   return (
-    <Project>
+    <Project id="projects">
       <SectionNumber props={"II."} />
       <div className="header_text">
         <h1>Projects</h1>
       </div>
       <div className="tags">
-        <a>HTML Email</a>
-        <a>React JS</a>
-        <a>Landing Page</a>
-        <a>All</a>
+        <span className={selectedType === 'All' || '' ? 'active' : '' } onClick={() => ChangeType('All')}>All</span>
+        <span className={selectedType === 'Email' && 'active'} onClick={() =>  ChangeType('Email')}>HTML&nbsp;Email</span>
+        <span className={selectedType === 'React' && 'active'} onClick={() => ChangeType('React')}>React&nbsp;JS</span>
+        <span className={selectedType === 'Landing Page' && 'active'} onClick={() => ChangeType('Landing Page')}>Landing&nbsp;Page</span>
         <div className="border_text">PROJECTS</div>
       </div>
-      <Carousel />
-      <div className="services">
-        <div>
-          <div className="border_text">SERVICES</div>
-        </div>
-        <div className="services_box">
-          <div className="services_text">
-            <img src={iconEmail} alt="Icon" />
-            <h3>Email Development</h3>
-            <p>
-              Lorem Ipsum is simply dummy text of the printing and
-              typesetting&nbsp;industry.
-            </p>
-            <a>SEE PROJECTS</a>
-          </div>
-          <div className="services_img">
-            <img src={iconServices1} alt="Services icon" />
-          </div>
-        </div>
-      </div>
-      <div className="services2">
-        <div className="services_box">
-          <div className="services_img">
-            <img src={iconServices2} alt="Services icon" />
-          </div>
-          <div className="services_text">
-            <img src={iconEmail} alt="Icon" />
-            <h3>Web Development</h3>
-            <p>
-              Lorem Ipsum is simply dummy text of the printing and
-              typesetting&nbsp;industry.
-            </p>
-            <a>SEE PROJECTS</a>
-          </div>
-        </div>
-      </div>
+      <Carousel chunked={chunked} loading={loading} />
+      <Services/>
     </Project>
   );
 };

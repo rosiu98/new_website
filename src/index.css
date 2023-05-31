@@ -1,6 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Italiana&family=Roboto:wght@400;500;700;900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Lily+Script+One&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Italiana&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Ropa+Sans:ital@1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cambo&display=swap');
 
 :root {
   --color-delicius: #d2e2f9;
@@ -14,11 +17,33 @@
   box-sizing: border-box;
 }
 
+::selection {
+  background: #e2b864;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2d313d;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #CF9627 ;
+}
+
 html {
   font-size: 62.5%;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 700px) {
   html {
     font-size: 50%;
   }
@@ -28,11 +53,12 @@ body,
 html {
   box-sizing: border-box;
   font-family: Arial, "Roboto", sans-serif;
+  scroll-behavior: smooth;
 }
 
 body {
   max-width: 1500px;
-  width: 95%;
+  width: 90%;
   margin: 0 auto;
 }
 
@@ -87,4 +113,280 @@ li {
   -webkit-text-stroke: 1px #545454;
   font-weight: bold;
   line-height: 100%;
+}
+
+.border_square {
+  background-image: url("./Assets/border_square.svg");
+  background-repeat: space;
+  width: 100%;
+  height: 12px;
+}
+
+@media (max-width: 1200px) {
+  .border_text {
+    font-size: 8.5rem;
+  }
+}
+
+.footer_icons {
+  display: flex;
+  flex-direction: row;
+}
+
+.icon {
+  border-radius: 100px;
+  width: 70px;
+  height: 70px;
+  background: #fff;
+  margin: 20px;
+  text-align: center;
+  font-size:25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height:100px;
+  font-family: sans-serif;
+  overflow: hidden;
+  /* box-shadow: 5px 10px 20px rgba(150, 150, 150, .3); */
+  transition: all .3s ease-out;
+  border: 2px solid #e2b864;
+}
+
+.icon.first {
+  margin-left: 0;
+}
+
+.icon span {
+  display: none;
+}
+
+.icon:hover {
+  width: 230px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  color: #fff;
+}
+
+.icon:hover span {
+  display: initial;
+}
+
+
+.github {
+  color: #000;
+}
+
+.github:hover {
+  background: #000;
+  color: #fff !important;
+}
+
+.github:hover {
+  background: #000;
+  color: #fff !important;
+}
+
+
+svg {
+  width: 30px;
+  transition: none;
+}
+
+@media (max-width: 900px) {
+  .footer_icons {
+    flex-direction: column;
+  }
+
+  .icon {
+    width: 50px;
+    height: 50px;
+    margin-left: 0;
+    
+  }
+
+  svg {
+    width: 25px !important;
+  }
+
+
+  .icon {
+    width: 230px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    color: #fff;
+  }
+  
+  .icon span {
+    display: inline-block;
+  }
+  
+  .github {
+    color: #000;
+  }
+  
+  .github {
+    background: #000;
+    color: #fff !important;
+  }
+  
+  .github {
+    background: #000;
+    color: #fff !important;
+  }
+}
+
+.cm-editor {
+  font-size: 1.3rem;
+}
+
+
+
+
+/* // Email Preview */
+
+.emailPage-container {
+  margin: 0 auto;
+  padding: 0rem 2rem 4rem 2rem;
+  min-height: 83vh;
+  width: 100%;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+}
+
+.emailPage-container .emailPage-main,
+.emailPage-container .emailPage-sidemenu {
+  border-radius: 10px;
+  background-color: #F4F4F4;
+}
+
+.pagehref {
+  margin: 0 auto;
+  padding: 2rem 2rem 2.5rem 2rem;
+  font-size: 1.6rem;
+  color: #808080;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pagehref .count-page {
+  display: flex;
+  align-items: center;
+  margin-right: 1.5rem;
+}
+
+.pagehref .pagehref-text span {
+  color: #2D313D;
+  font-weight: bold;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+}
+
+.emailPage-container .emailPage-main {
+  display: flex;
+  justify-content: center;
+  align-items: top;
+  padding: 4.5rem 0;
+  position: relative;
+  background-color: #ffffff;
+}
+
+.emailPage-container .emailPage-main .emailPage-main-box {
+  max-width: 700px;
+}
+
+.emailPage-container .emailPage-main .emailPage-main-box iframe {
+  margin: 0 auto;  
+}
+
+
+.emailPage-container .emailPage-main .emailPage-main-view {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.emailPage-container .emailPage-sidemenu {
+  min-height: 30rem;
+  align-self: flex-start;
+  position: sticky;
+  top: 150px;
+}
+
+.emailPage-container .emailPage-sidemenu .emailPage-buttons {
+  padding: 0 1.5rem;
+}
+.emailPage-loading,
+.emailPage-loading svg {
+  height: 100% !important;
+  /* background-color: #5a5a5a; */
+  width: 100% !important;
+  transition: 4s ease-out;
+}
+.buttonView {
+  background-color: #2A3990;
+}
+
+.red {
+  background-color: #9C254D;
+}
+
+.green {
+  background-color: green;
+}
+
+/* .cm-content {
+  width: 700px !important;
+  height: 75vh !important;
+  overflow: scroll !important;
+  font-size: 1.2rem !important;
+  white-space: pre-wrap !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+} */
+
+.cm-editor {
+  width: 700px;
+  max-height: 65vh;
+  overflow-y: auto;
+}
+
+.goBack {
+  cursor: pointer;
+}
+
+.user_info {
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border: 1px solid rgba(94, 103, 123, 0.1);
+  margin-top: 2rem;
+  border-radius: 10px;
+}
+
+.user_created {
+  font-size: 1.2rem;
+  color: #808080;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+
+.user_created img {
+  width: 25px;
+  height: 25px;
+  object-fit: cover;
+  display: block;
+  border-radius: 50%;
+}
+
+@media (max-width: 1220px) {
+        
+  .emailPage-container .emailPage-main {
+    padding: 7.5rem 0;
+  }
 }
