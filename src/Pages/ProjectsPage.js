@@ -5,6 +5,7 @@ import ProjectContent from '../Components/ProjectContent'
 import '../indexProject.css';
 import { useSearchParams } from 'react-router-dom';
 import manualContent from '../Components/manualContent';
+import globalApi from '../globalApi';
 
 
 const Main = styled.main`
@@ -34,7 +35,7 @@ const ProjectsPage = () => {
   
     useEffect(() => {
       const fetchData = async () => {
-        const response = await fetch('https://email-app.website/api/v1/profile/20');
+        const response = await fetch(`${globalApi}/profile/20`);
         const result = await response.json();
         let emailsResults = result.rows.filter(row => row.contentblock === null || undefined)
   

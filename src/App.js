@@ -7,6 +7,7 @@ import EmailPreviewPage from "./Pages/EmailPreviewPage";
 import CvPage from "./Pages/CvPage";
 
 function App() {
+
   return (
     <>
     <SkeletonTheme baseColor="#d7d7d7" highlightColor="#e7e7e7">

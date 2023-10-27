@@ -4,6 +4,7 @@ import Carousel from "./Carousel";
 import SectionNumber from "./SectionNumber";
 import Services from "./Services";
 import manualContent from "./manualContent";
+import globalApi from "../globalApi";
 
 const Project = styled.section`
   background-color: #ececec;
@@ -86,10 +87,11 @@ const Projects = () => {
   const [selectedType, setSelectedType] = useState('All')
   const [loading , setLoading] = useState(true)
 
+
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true)
-      const response = await fetch('https://email-app.website/api/v1/profile/20');
+      const response = await fetch(`${globalApi}/profile/20`);
       const result = await response.json();
       let emailsResults = result.rows.filter(row => row.contentblock === null || undefined)
 
@@ -101,7 +103,6 @@ const Projects = () => {
         emailsResults = emailsResults.filter(row => row.type === selectedType)
       }
 
-      console.log(emailsResults)
 
       const chunkData = () => {
         const chinkSize = 5;

@@ -14,6 +14,7 @@ import emails_icon from '../Assets/email_icon.svg'
 import CodeMirror from "@uiw/react-codemirror"
 import { dracula } from '@uiw/codemirror-theme-dracula';
 import { html as codeMirrorHtml } from "@codemirror/lang-html"
+import globalApi from '../globalApi';
 
 
 const Main = styled.main`
@@ -191,7 +192,7 @@ const EmailPreviewPage = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`https://email-app.website/api/v1/projects/${id}`);
+                const response = await fetch(`${globalApi}/projects/${id}`);
                 const result = await response.json();
                 setData(result.rows)
                 setCode(result.rows.html_code.replace("<head>", '<head> <script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/3.6.0/iframeResizer.contentWindow.min.js"></script>'))
