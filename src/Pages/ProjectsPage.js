@@ -35,7 +35,7 @@ const ProjectsPage = () => {
   
     useEffect(() => {
       const fetchData = async () => {
-        const response = await fetch(`${globalApi}/profile/20`);
+        const response = await fetch(`${globalApi}/profile/32`);
         const result = await response.json();
         let emailsResults = result.rows.filter(row => row.contentblock === null || undefined)
   
